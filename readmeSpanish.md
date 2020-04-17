@@ -32,7 +32,7 @@ Para la construcción del mismo, se debe seguir el proyecto:<br>
 Desde el navegador web se puede enviar los tonos o comandos tanto DTMF (frecuencia dual) como monotonos (una sóla frecuencia).
 Podemos hacer uso del teclado izquierdo para generar los tonos, o bien, del derecho para enviar la secuncia de control:
 <ul>
- <li>0 .. 10 Reproduce un Track</li>
+ <li>0 .. 10 Reproduce un Track (directorio Tracks 0.mp3 .. 10.mp3)</li>
  <li>Anterior y siguiente Track</li>
  <li>Subir y bajar volumen</li>
  <li>Parar o reproducir</li> 
