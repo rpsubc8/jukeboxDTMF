@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>DTMF jukebox</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">  
+  <script src="p5.js"></script>
+  <script src="p5.sound.js"></script>
+  <script src="p5.dom.js"></script>
+  <script src="sketch.js"></script>  
+ </head>
+ <body style="padding:0;margin:0;background-color:#C7C7C7;">
+  <div id='divSoundTrack' style='visibility: collapse;'>  
+   <audio id="soundTrack0" src="Tracks/0.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack1" src="Tracks/1.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack2" src="Tracks/2.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack3" src="Tracks/3.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack4" src="Tracks/4.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack5" src="Tracks/5.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack6" src="Tracks/6.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack7" src="Tracks/7.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack8" src="Tracks/8.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack9" src="Tracks/9.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+   <audio id="soundTrack10" src="Tracks/10.mp3" hidden = 'true' preload="auto" controls style='visibility: collapse;'></audio>
+  </div>
+    
+  <table border='0'>
+   <tbody style='border:none;'>
+    <tr style='border:none;'>
+     <td style='border:none;'>
+      <div id='keybuttonsDTMF'>	  
+       <ul>
+	    Keyboard DTMF
+        <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('1');">1</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('2');">2</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('3');">3</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('A');">A</button>		
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('4');">4</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('5');">5</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('6');">6</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('B');">B</button>		 
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('7');">7</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('8');">8</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('9');">9</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('C');">C</button>
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('*');">*</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('0');">0</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('#');">#</button>
+		 <button type="button" style='width:50px;' onclick="PlayDTMF('D');">D</button>		 		 
+		</li>
+       </ul>
+      </div>	 
+     </td>
+     <td style='border:none;'>
+      <div id='keybuttonsDTMFSeq'>	  
+       <ul>
+	    Player DTMF
+        <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#01*');">1</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#02*');">2</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#03*');">3</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#13*');">&#62;&#62;</button>		
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#04*');">4</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#05*');">5</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#06*');">6</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#14*');">&#60;&#60;</button>		 
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#07*');">7</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#08*');">8</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#09*');">9</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#15*');">&#62;</button>
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#11*');">+</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#00*');">0</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#12*');">-</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqDTMF('#10*');">10</button>		 		 
+		</li>
+       </ul>
+      </div>	 
+     </td>	 
+	</tr>
+	<tr style='border:none;'>
+     <td style='border:none;'>	 
+      <div id='keybuttonsMono'>
+       <ul>
+	    Keyboard Monotone
+        <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('1')">1</button>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('2')">2</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>		
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('4')">4</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>		 
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('7')">7</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		 <button type="button" style='width:50px;'>&nbsp</button>
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('*')">*</button>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('0')">0</button>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('#')">#</button>
+		 <button type="button" style='width:50px;' onclick="PlayMonotone('D')">D</button>		 		 
+		</li>
+       </ul>
+      </div>  	 
+     </td>
+
+     <td style='border:none;'>
+      <div id='keybuttonsMonoSeq'>
+       <ul>
+	    Player Monotone
+        <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#01*');">1</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#02*');">2</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#04*');">3</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#20*');">&#62;&#62;</button>		
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#07*');">4</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#0D*');">5</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#10*');">6</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#21*');">&#60;&#60;</button>		 
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#11*');">7</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#12*');">8</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#14*');">9</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#22*');">&#62;</button>
+		</li>
+	    <li style='list-style:none'>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#17*');">+</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#00*');">0</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#1D*');">-</button>
+		 <button type="button" style='width:50px;' onclick="PlaySeqMonotone('#24*');">10</button>		 		 
+		</li>
+       </ul>
+      </div>  	 
+     </td>
+	 
+    </tr>
+   </tbody>
+  </table>
+      
+ </BODY>
+</HTML>
