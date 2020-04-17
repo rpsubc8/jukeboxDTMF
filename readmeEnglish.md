@@ -4,20 +4,20 @@ in real time using microphone or gamepad (MT8870 connected to joystick), under H
 <center><img src='preview/previewDTMF.gif'></center>
 <br>
 <ul>
- <li><a href='#interface'>Interface<a/></li>
- <Href='#html5'>HTML5<a/></li> 
- <Code 
+ <li><a href='#interface'>Interface<a/></li> 
+ <li><a href='#html5'>HTML5<a/></li> 
+ <li><a href='#codigo'>Código</a></li>   
 </ul>
 <br>
 
 
-<a name="interface"><h2>Interface</h2><a>
+<a name="interface"><h2>Interface</h2></a>
 Several interfaces are allowed:
 <ul>
- <Microphone or line input
- <Line or speaker output
- <Joystick or gamepad modified with MT8870
- <Arduino emulating joystick (ARDUINO UNO R3 ATMEGA 16u2 and LEONARDO)
+ <li>Microphone or line input</li>
+ <li>Line or speaker output</li>
+ <li>Joystick or gamepad modified with MT8870</li>
+ <li>Arduino emulating joystick (ARDUINO UNO R3 ATMEGA 16u2 and LEONARDO)</li>
 </ul>
 Although using the MT8870 involves a little more difficulty, much more speed and accuracy is achieved in decoding DTMF tones.
 Thanks to the MT8870 chip, connecting the STQ, Q4, Q3, Q2 and Q1 outputs to a transistor allows you to open or close
@@ -33,15 +33,15 @@ The tones are being decoded from the microphone or the gamepad from the web brow
 The left keyboard generates a single tone, while the right keyboard sends a player control sequence:
 <ul>
  <li>0 .. 10 Play a Track (directory Tracks 0.mp3 .. 10.mp3)</li>
- <Previous and next Track
- <Volume up and down
- <Stop or play 
+ <li>Previous and next Track</li>
+ <li>Volume up and down</li>
+ <li>Stop or play</li>
 </ul>
 <center><img src='preview/previewMonotone.gif'></center>
 You can adjust the playback speed of the tones, as well as select with Fast to send the least number of tones.
 
 <br><br>
-<a name="code"><h2>Code</h2><a>
+<a name="code"><h2>Code</h2></a>
 We can modify:
 <pre><code>
 var gb_id_stq = 3; //Boton PAD for pin STQ MT8870
@@ -56,6 +56,3 @@ var gb_log_debug = true; //Debug console
 var gb_use_gamepad_dtmf= false;// Use gamepad
 var gb_use_mic_dtmf= true; // Use microphone
 </code></pre>
-
-
-Translated with www.DeepL.com/Translator (free version)
