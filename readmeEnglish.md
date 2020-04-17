@@ -6,7 +6,7 @@ in real time using microphone or gamepad (MT8870 connected to joystick), under H
 <ul>
  <li><a href='#interface'>Interface<a/></li> 
  <li><a href='#html5'>HTML5<a/></li> 
- <li><a href='#codigo'>Código</a></li>   
+ <li><a href='#codigo'>Code</a></li>   
 </ul>
 <br>
 
