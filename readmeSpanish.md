@@ -29,8 +29,8 @@ Para la construcción del mismo, se debe seguir el proyecto:<br>
 
 <br><br>
 <a name="html5"><h2>HTML5</h2></a>
-Desde el navegador web se puede enviar los tonos o comandos tanto DTMF (frecuencia dual) como monotonos (una sóla frecuencia).
-Podemos hacer uso del teclado izquierdo para generar los tonos, o bien, del derecho para enviar la secuncia de control:
+Desde el navegador web se está decodificando los tonos desde el micrófono o el gamepad. Sin embargo, si queremos realizar una prueba, se puede enviar los tonos o comandos tanto DTMF (frecuencia dual) como monotonos (una sóla frecuencia) desde el teclado que se visualiza en la web.<br>
+El teclado izquierdo genera un tono simple, mientras que el derecho envia una secuencia de control del Player:
 <ul>
  <li>0 .. 10 Reproduce un Track (directorio Tracks 0.mp3 .. 10.mp3)</li>
  <li>Anterior y siguiente Track</li>
