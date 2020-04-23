@@ -82,6 +82,7 @@ var gb_ctrl_lbl_speed_dtmf; //Speed
 var gb_ctrl_input_speed_dtmf; //Speed
 var gb_ctrl_chkbox_fast; //modo fast
 var gb_ctrl_chkbox_log;
+var gb_ctrl_chkboxNTSC; //sincronizado ntsc
 
 //Configuraciones
 var gb_id_stq = 3;             //Boton PAD para pin STQ MT8870
@@ -95,6 +96,7 @@ var gb_use_fast = false;       //Modo fast reducir tonos
 var gb_log_debug = true;       //Debug consola
 var gb_use_gamepad_dtmf= false;//Usar gamepad
 var gb_use_mic_dtmf= true;     //Usar microfono
+var gb_use_ntsc_arduino = false;   //Sonido sincronizados con NTSC 63.55 microseconds
 
 //resto variables
 var gb_time_silence = 1000;
@@ -211,6 +213,10 @@ function setup(){
   gb_ctrl_chkboxMic = createCheckbox('Micrófono', gb_use_mic_dtmf);//checkbox mic
   gb_ctrl_chkboxMic.position(250,190);
   gb_ctrl_chkboxMic.changed(MicEvent);
+
+  gb_ctrl_chkboxNTSC = createCheckbox('NTSC', gb_use_ntsc_arduino);//checkbox mic
+  gb_ctrl_chkboxNTSC.position(250,210);
+  gb_ctrl_chkboxNTSC.changed(NTSCEvent);  
    
 	  
   gb_forceDraw = true;     
@@ -219,6 +225,19 @@ function setup(){
  catch(err) 
  {
    DebugLog(err.message.toString());
+ }  
+}
+
+//PAra sincronizar con sonidos NTSC arduinocade
+function NTSCEvent()
+{
+ try
+ {
+  gb_use_ntsc_arduino = this.checked() ? true : false;  
+ }
+ catch(err)
+ {  
+  DebugLog(err.message.toString());
  }  
 }
 
@@ -1320,35 +1339,64 @@ function Poll_FFT_MONOTONE()
   let row= -1;
   let col= -1;  
   
-  //if (spectrum[31] > 250){row = 0;}
-  if (spectrum[32] > 230){row = 0;}
-  else{
-   if (spectrum[35] > 230){row = 1;}
+  if (gb_use_ntsc_arduino) //63.55 microsegundos
+  {
+   //Para belial
+   if (spectrum[32] > 230){row = 0;}
    else{
-    if (spectrum[39] > 230){row = 2;}
+    if (spectrum[35] > 230){row = 1;} //4 770 /21,533203125 = 35,75873015873015873015873015873
     else{
-     if (spectrum[43] > 230){row = 3;}
-	}
-   }
-  }
- 
-  //if (spectrum[55] > 250){col = 0;}
-  if (spectrum[56] > 230){col = 0;}
-  else{
-   //if (spectrum[61] > 250){col = 1;}
-   if (spectrum[62] > 230){col = 1;}
-   else{
-    //if (spectrum[67] > 250){col = 2;}
-	if (spectrum[68] > 230){col = 2;}
-    else{
-     if (spectrum[76] > 230){col = 3;}
-	}
-   }
-  }
+     if (spectrum[39] > 230){row = 2;}
+     else{
+      if (spectrum[18] > 230){row = 3;} //* 393,3910306845 /21,533203125 = 18,269043783262040816326530612245
+	 }
+    }
+   }  
   
-    //let cadLog = '67:'+spectrum[67].toString()+' 68:'+spectrum[68].toString()+' 69:'+spectrum[69].toString();
-	//let cadLog = '31:'+spectrum[31].toString()+' 32:'+spectrum[32].toString()+' 33:'+spectrum[33].toString();
-	//let cadLog = '61:'+spectrum[61].toString()+' 62:'+spectrum[62].toString()+' 63:'+spectrum[63].toString();
+   if (spectrum[14] > 230){col = 0;} //2 302,60848514192 /21,533203125 = 14
+   else{   
+    if (spectrum[62] > 230){col = 1;}
+    else{    
+ 	 if (spectrum[26] > 230){col = 2;} //# 561,98718669215 /21,533203125 = 26,09863397608896145124716553288
+     else{
+      if (spectrum[76] > 230){col = 3;}
+ 	 }
+    }
+   }  	  
+  }
+  else
+  {
+   //if (spectrum[31] > 250){row = 0;}
+   if (spectrum[32] > 230){row = 0;}
+   else{
+    if (spectrum[35] > 230){row = 1;}
+    else{
+     if (spectrum[39] > 230){row = 2;}
+     else{
+      if (spectrum[43] > 230){row = 3;}
+	 }
+    }
+   }
+ 
+   //if (spectrum[55] > 250){col = 0;}
+   if (spectrum[56] > 230){col = 0;}
+   else{
+    //if (spectrum[61] > 250){col = 1;}
+    if (spectrum[62] > 230){col = 1;}
+    else{
+     //if (spectrum[67] > 250){col = 2;}
+	 if (spectrum[68] > 230){col = 2;}
+     else{
+      if (spectrum[76] > 230){col = 3;}
+	 }
+    }
+   }  	 
+  }
+
+  
+  //let cadLog = '67:'+spectrum[67].toString()+' 68:'+spectrum[68].toString()+' 69:'+spectrum[69].toString();
+  //let cadLog = '31:'+spectrum[31].toString()+' 32:'+spectrum[32].toString()+' 33:'+spectrum[33].toString();
+  //let cadLog = '61:'+spectrum[61].toString()+' 62:'+spectrum[62].toString()+' 63:'+spectrum[63].toString();
   //console.log (cadLog);
   		
   if ((row>-1)||(col>-1))
